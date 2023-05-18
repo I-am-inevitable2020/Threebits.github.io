@@ -1,0 +1,26 @@
+{% extends 'threebits/base.html' %}
+
+{%block title%}
+{%endblock%}
+{%block content%}
+<pre>
+  Welcome to 3bits
+ It's all about Music
+</pre><hr/>
+<div>
+  <ul class="home-list">
+    {% for album in albums %}
+      <li >
+        <span><a class="home-a" href="{% url 'threebits:album_detail' username=album.album_artist album=album.album_name %}">
+          <img src="{{ album.album_logo.url }}" style="width:90px;height:90px;border-radius:45px;border-color:white;">
+        </a></span>
+         <span style="color:blue;">{{album.album_name}} by</span>
+        <a class="home-a" href="{% url 'threebits:profile_detail' username=album.album_artist %}">
+          {{album.album_artist}}
+        </a>
+      </li><hr/>
+    {% endfor %}
+  </ul>
+</div>
+
+{%endblock%}

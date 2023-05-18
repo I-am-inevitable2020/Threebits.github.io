@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+  <head>
+    <title>{%block title%}threebits{%endblock%}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'threebits/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'threebits/css/threebits.css' %}">
+<style>
+    body {
+	background: linear-gradient(-45deg, #d1b095, #de96b1, #8fc6da, #74dec5);
+	background-size: 400% 400%;
+	animation: gradient 45s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+  </style>
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color:#d1b095;">
+   <div class="container-fluid">
+    <a class="base-a-img" href="{% url 'threebits:home' %}">
+                <img src="{%static 'threebits/img/threebits2.0.png' %}" style="width:55px;" alt="threebits2.0">
+              </a>
+    <a class="navbar-brand" href="#">Threebits</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         </ul>
+            {% if user.is_authenticated %}
+            <li class="navbar navbar-expand-lg">
+              <a class="base-a" href="{% url 'threebits:logout' %}">Log out</a>
+            </li>
+            <li class="navbar navbar-expand-lg">
+              <a class="base-a" href="{% url 'threebits:add_album' user %}">Add album</a>
+            </li>
+            <li class="navbar navbar-expand-lg">
+              <a class="base-a" href="{% url 'threebits:profile_detail' user %}">{{ user.username }}</a>
+            </li>
+            {% else %}
+            <li class="navbar navbar-expand-lg">
+              <a class="base-a" href="{% url 'threebits:login' %}">Log in</a>
+            </li>
+            <li class="navbar navbar-expand-lg">
+              <a class="base-a" href="{% url 'threebits:signup' %}">Sign up</a>
+            </li>
+            {% endif %}
+      </form>
+    </div>
+  </div>
+
+</nav>
+    <div>
+      {%block content%}
+      {%endblock%}
+    </div>
+ 
+  </body>
+
+  
+    
+
+</html>
